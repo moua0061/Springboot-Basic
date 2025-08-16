@@ -14,6 +14,6 @@ public class NotificationManager {
 
     //METHODS:
     public void sendNotification(String message){
-        notificationService.sendMessage(message);
+        //notificationService.sendMessage(message);
     }
 }
