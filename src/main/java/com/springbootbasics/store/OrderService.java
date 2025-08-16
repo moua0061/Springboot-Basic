@@ -1,6 +1,7 @@
 package com.springbootbasics.store;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class OrderService {
 
     //constructor:
     //@Autowired
-    public OrderService(PaymentService paymentService) {
+    public OrderService(@Qualifier("paypal") PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
