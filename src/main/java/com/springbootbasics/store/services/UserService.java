@@ -1,14 +1,16 @@
 package com.springbootbasics.store.services;
 
 import com.springbootbasics.store.entities.Address;
+import com.springbootbasics.store.entities.Category;
+import com.springbootbasics.store.entities.Product;
 import com.springbootbasics.store.entities.User;
-import com.springbootbasics.store.repositories.AddressRepository;
-import com.springbootbasics.store.repositories.ProfileRepository;
-import com.springbootbasics.store.repositories.UserRepository;
+import com.springbootbasics.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Service
@@ -17,6 +19,8 @@ public class UserService {
     private final EntityManager entityManager;
     private final ProfileRepository profileRepository;
     private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public void showEntityStates(){
@@ -76,5 +80,24 @@ public class UserService {
         var address = user.getAddresses().getFirst();
         user.removeAddress(address);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void manageProduct(){
+        var user = userRepository.findById(2L).orElseThrow();
+        var products = productRepository.findAll();
+        products.forEach(user::addFavoriteProduct);
+        userRepository.save(user);
+        //var category = new Category("Category 1");
+//        var category = categoryRepository.findById((byte)1).orElseThrow();
+//
+//        var product = Product.builder()
+//                .name("product 2")
+//                .description("product description2")
+//                .price(BigDecimal.valueOf(10.99))
+//                .category(category)
+//                .build();
+//
+//        productRepository.save(product);
     }
 }
