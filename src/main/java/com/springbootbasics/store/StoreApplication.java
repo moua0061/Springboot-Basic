@@ -20,8 +20,8 @@ public class StoreApplication {
         //var orderService2 = context.getBean(OrderService.class);
         //orderService.placeOrder();
         //var resource = context.getBean(HeavyResource.class);
-        var userService = context.getBean(UserService.class);
-        userService.registerUser(new User(1L, "email@email.com", "password", "Lia"));
+        //var userService = context.getBean(UserService.class);
+        //userService.registerUser(new User(1L, "email@email.com", "password", "Lia"));
         //userService.registerUser(new User(1L, "email@email.com", "password", "Lia"));
         //context.close(); //used during ConfigurableApplicationContext
     }
