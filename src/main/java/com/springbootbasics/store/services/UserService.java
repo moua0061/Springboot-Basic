@@ -1,12 +1,12 @@
 package com.springbootbasics.store.services;
 
+import com.springbootbasics.store.entities.Address;
 import com.springbootbasics.store.entities.User;
+import com.springbootbasics.store.repositories.AddressRepository;
 import com.springbootbasics.store.repositories.ProfileRepository;
 import com.springbootbasics.store.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import org.springframework.core.PriorityOrdered;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final EntityManager entityManager;
     private final ProfileRepository profileRepository;
+    private final AddressRepository addressRepository;
 
     @Transactional
     public void showEntityStates(){
@@ -45,5 +46,26 @@ public class UserService {
         var profile = profileRepository.findById(2L).orElseThrow();
         System.out.println(profile.getUser().getEmail());
         //System.out.println(profile.getBio());
+    }
+
+    public void fetchAddress(){
+        var address = addressRepository.findById(1L).orElseThrow();
+    }
+
+    public void persistRelated(){
+        var user =  User.builder()
+                .name("john")
+                .email("email@gmail.com")
+                .password("password")
+                .build();
+        var address = Address.builder()
+                .state("123 street")
+                .city("city")
+                .state("state")
+                .zip("12345")
+                .build();
+        user.addAddress((address));
+        userRepository.save(user);
+        addressRepository.save(address);
     }
 }

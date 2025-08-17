@@ -29,7 +29,7 @@ public class Address {
     @Column(name = "zip")
     private String zip;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") //used in a 1:M relationship with FK
     @ToString.Exclude
     private User user;

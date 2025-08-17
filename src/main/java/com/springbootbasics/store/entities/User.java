@@ -30,7 +30,7 @@ public class User {
     @Column(nullable = false, name="password")
     private String password;
 
-    @OneToMany(mappedBy = "user") //the owner of the relationship
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST) //the owner of the relationship
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
