@@ -1,13 +1,12 @@
 package com.springbootbasics.store.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,6 +29,8 @@ public class Address {
     @Column(name = "zip")
     private String zip;
 
-    //@Column(name = "user_id")
-    //private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id") //used in a 1:M relationship with FK
+    @ToString.Exclude
+    private User user;
 }
