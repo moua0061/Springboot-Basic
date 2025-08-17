@@ -1,6 +1,7 @@
 package com.springbootbasics.store.repositories;
 
 import com.springbootbasics.store.entities.Product;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -45,4 +46,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Query("select p from Product p join p.category where p.price between :min and :max order by p.name")
     List<Product> findProduct(@Param("min") BigDecimal min, @Param("max") BigDecimal max);
+
+    @Modifying //need to use this if we're modifying anything
+    @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
+    void udpatePriceByCategory(BigDecimal newPrice, Byte categoryId);
 }
