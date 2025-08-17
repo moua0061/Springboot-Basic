@@ -1,5 +1,6 @@
 package com.springbootbasics.store;
 
+import com.springbootbasics.store.entities.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +12,9 @@ public class StoreApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args); //for beans
+        //var user = new User();
+        var user = User.builder().name("John").password("123").build();
+
         //ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args); //gives me manually close the context
         //var manager = context.getBean(NotificationManager.class);
         //manager.sendNotification("This is a test");
