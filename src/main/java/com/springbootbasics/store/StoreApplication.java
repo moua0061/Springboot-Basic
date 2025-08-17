@@ -1,6 +1,7 @@
 package com.springbootbasics.store;
 
 import com.springbootbasics.store.entities.Address;
+import com.springbootbasics.store.entities.Profile;
 import com.springbootbasics.store.entities.Tag;
 import com.springbootbasics.store.entities.User;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +27,12 @@ public class StoreApplication {
 //        var tag = new Tag("tag1");
 //        user.getTags().add(tag);
 //        tag.getUsers().add(user);
-        user.addTag("tag1");
+        //user.addTag("tag1");
+        var profile = Profile.builder()
+                        .bio("bio")
+                        .build();
+        user.setProfile(profile);
+        profile.setUser(user);
         System.out.println(user);
 
         //ConfigurableApplicationContext context = SpringApplication.run(StoreApplication.class, args); //gives me manually close the context

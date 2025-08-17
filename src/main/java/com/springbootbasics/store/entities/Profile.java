@@ -1,11 +1,14 @@
 package com.springbootbasics.store.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "profiles")
 public class Profile {
@@ -25,4 +28,10 @@ public class Profile {
 
     @Column(name = "loyalty_points")
     private int loyaltyPoints;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId //hibernate will use this as both PK & FK
+    @ToString.Exclude
+    private User user;
 }
