@@ -49,5 +49,5 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Modifying //need to use this if we're modifying anything
     @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
-    void udpatePriceByCategory(BigDecimal newPrice, Byte categoryId);
+    void updatePriceByCategory(BigDecimal newPrice, Byte categoryId);
 }
