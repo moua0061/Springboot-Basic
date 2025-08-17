@@ -59,7 +59,7 @@ public class UserService {
                 .password("password")
                 .build();
         var address = Address.builder()
-                .state("123 street")
+                .street("123 street")
                 .city("city")
                 .state("state")
                 .zip("12345")
@@ -67,5 +67,14 @@ public class UserService {
         user.addAddress((address));
         userRepository.save(user);
         addressRepository.save(address);
+    }
+
+    @Transactional
+    public void deleteRelated(){
+        //userRepository.deleteById(14L);
+        var user = userRepository.findById(13L).orElseThrow();
+        var address = user.getAddresses().getFirst();
+        user.removeAddress(address);
+        userRepository.save(user);
     }
 }
